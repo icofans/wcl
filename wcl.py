@@ -60,7 +60,7 @@ def check_wifi_connect():
 # 检查时间段
 def check_date_time():
     # 时间范围
-    start_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'14:00', '%Y-%m-%d%H:%M')
+    start_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'18:00', '%Y-%m-%d%H:%M')
     end_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'23:59', '%Y-%m-%d%H:%M')
     # 当前时间
     n_time = datetime.datetime.now()
