@@ -75,7 +75,7 @@ def control_yeelight(status):
         dic = bulb.get_properties()
         # {'sat': '100', 'color_mode': '2', 'ct': '6500', 'delayoff': '0', 'power': 'on', 'rgb': '16711680', 'hue': '359', 'music_on': '0', 'bright': '82', 'name': None, 'flowing': '0'}
         if dic.has_key('power'):
-        	power = dic.get('power')
+			power = dic.get('power')
 			if bulb and status == True and power == 'off':
             	bulb.turn_on()
 	    	else:
