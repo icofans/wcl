@@ -18,12 +18,8 @@ from yeelight import discover_bulbs
 bulb_ip = "192.168.10.2"
 # 服务的网络接口
 network_interface = "enp3s0"
-# network_interface = "en0"
 # 手机mac地址
 phone_mac_address = "5C:F7:E6:CA:ED:E5"
-# phone_mac_address = "40:8d:5c:81:ed:6b"
-# 灯是否打开
-is_open = False
 
 
 # 执行命令
@@ -76,14 +72,14 @@ def control_yeelight(status):
     if len(discover_bulbs()):
         # 连接到yeelight
         bulb = Bulb(bulb_ip)
-        if bulb and status == True:
-            bulb.turn_on()
-            global is_open
-            is_open = True
-    else:
-        print("未找到灯")
-
-
+        dic = bulb.get_properties()
+        # {'sat': '100', 'color_mode': '2', 'ct': '6500', 'delayoff': '0', 'power': 'on', 'rgb': '16711680', 'hue': '359', 'music_on': '0', 'bright': '82', 'name': None, 'flowing': '0'}
+        if dic.has_key('power'):
+        	power = dic.get('power')
+			if bulb and status == True and power == 'off':
+            	bulb.turn_on()
+    		else:
+        		print("未找到灯")
 
 def schedule_task():
     schedule.every(0.1).minutes.do(do_check)
@@ -98,12 +94,6 @@ def do_check():
         # 判断是否回家
         if (check_wifi_connect() == True):
             # 判断灯的状态
-            if (is_open == False):
-                # 开灯
-                print("开灯")
-                control_yeelight(True)
-            else:
-                print("灯已打开")
-
+            control_yeelight(True)
 
 schedule_task()
