@@ -77,9 +77,9 @@ def control_yeelight(status):
         if dic.has_key('power'):
         	power = dic.get('power')
 			if bulb and status == True and power == 'off':
-            			bulb.turn_on()
-	    		else:
-        			print("未找到灯")
+            	bulb.turn_on()
+	    	else:
+        		print("未找到灯")
 
 def schedule_task():
     schedule.every(0.1).minutes.do(do_check)
